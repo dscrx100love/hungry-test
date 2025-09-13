@@ -1,14 +1,14 @@
 :root {
-    --primary-color: #0a2c4e; /* ネイビー */
-    --secondary-color: #f0f8ff; /* オフホワイト */
-    --accent-color: #ffa500; /* オレンジ */
-    --accent-color-dark: #e69500;
-    --text-color: #333;
-    --light-gray: #f0f0f0;
-    --border-color: #ddd;
-    --gold: #ffd700;
-    --silver: #c0c0c0;
-    --bronze: #cd7f32;
+    --primary-color: #006a6a; /* 深いティールグリーン (メインの濃い色) */
+    --secondary-color: #f4f8f8; /* ごく薄いティール系の白 (背景色) */
+    --accent-color: #ffb347; /* アプリコット (アクセント色) */
+    --accent-color-dark: #e69a2e; /* アクセント色のホバー時 */
+    --text-color: #333; /* 基本のテキスト色 */
+    --light-gray: #f0f0f0; /* 明るい灰色 (背景などに使用) */
+    --border-color: #ddd; /* 境界線の色 */
+    --gold: #ffd700; /* 金バッジの色 */
+    --silver: #c0c0c0; /* 銀バッジの色 */
+    --bronze: #cd7f32; /* 銅バッジの色 */
 }
 
 body {
