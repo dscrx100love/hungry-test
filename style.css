@@ -180,7 +180,8 @@ body {
 }
 
 .chart-container {
-    margin-bottom: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -280,6 +281,11 @@ body {
     }
     .answer-btn {
         width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+   width: 45px;
         height: 45px;
         font-size: 1.1rem;
     }
