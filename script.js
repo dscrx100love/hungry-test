@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultChartCanvas = document.getElementById('result-chart');
     const badgePlaceholder = document.getElementById('badge-placeholder');
     const principlesContainer = document.getElementById('principles-container');
+    const resultCharImg = document.getElementById('result-char-img');
 
     // アイコンデータ
     const principleIcons = {
@@ -145,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return score.count > 0 ? (score.total / (score.count * 5)) * 100 : 0; // 100点満点に正規化
         });
 
-        let resultType, description, badgeColor;
+        let resultType, description;
 
         const minScore = Math.min(...principleAverages);
         let weakestPrinciples = principles.filter((p, i) => principleAverages[i] === minScore);
@@ -165,22 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (totalScore >= 120) {
             resultType = "盤石最強タイプ";
-            badgeColor = 'var(--gold)';
             description = `<strong>素晴らしい！あなたは既に「食いっぱぐれない」ための強固な土台を築いています。</strong><br><br>10の原則のほとんどを高いレベルで実践できており、自己管理能力が非常に高いです。自信を持って、そのスタイルを続けていきましょう。<br><br>次のステージは「より深く」探求し、影響力を「より広く」展開していくことです。<br><br>今後のメルマガでは、あなたのレベルをさらに引き上げるための応用的な思考法や、新しい時代の稼ぎ方、生き方についてもお届けします。いっしょに学び続けてレベルアップしていきましょう。`;
         } else if (totalScore >= 75) {
             resultType = "伸びしろタイプ";
-            badgeColor = 'var(--silver)';
             description = `<strong>可能性の塊！あなたは「食いっぱぐれない」自分に変わる大きなポテンシャルを秘めています。</strong><br><br>いくつかの原則は実践できています。しかし、まだ改善の余地があるようです。特に <strong>${advice}</strong> の項目は、あなたの「伸びしろ」です。ここを意識的に改善するだけで、人生の安定度と幸福度はUPしていくでしょう。<br><br>ただし、完璧を目指す必要はありません。まずは、最も点数が低かった項目から「一つ行動を変えてみる」ことから始めてみませんか？<br><br>今後のメルマガでは、あなたの「伸びしろ」である各原則の改善につながる考え方を一つずつ解説していきます。診断で明らかになった課題を、メルマガを読みながら一緒にクリアしていきましょう！`;
         } else {
             resultType = "リスクタイプ";
-            badgeColor = 'var(--bronze)';
             description = `<strong>今が絶好のチャンス！ここから人生を好転させていきましょう。</strong><br><br>診断お疲れ様でした。正直すこし不安を感じているかもしれません。しかし、いま最も大事なのは、あなたが「自分の現在地を正直に把握できた」という事実です。何事も変化は小さなところから。特に <strong>${advice}</strong> は、人生を好転させるための最優先課題です。<br><br>絶望しないでくださいね。今後のメルマガでは、まず何から手をつけるべきか、人生の土台となる基本的な原則から、必要な考え方をお伝えしていきます。一つずつ一緒に乗り越え、盤石な自分を築き上げていきましょう。`;
         }
 
-        displayResults(totalScore, resultType, description, principleAverages, advice, badgeColor);
+        displayResults(totalScore, resultType, description, principleAverages, advice);
     }
 
-    function displayResults(totalScore, resultType, description, principleAverages, advice, badgeColor) {
+    function displayResults(totalScore, resultType, description, principleAverages, advice) {
         quizPage.classList.add('hidden');
         resultPage.classList.remove('hidden');
 
@@ -199,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScore.innerText = `${totalScore}点 / 150点満点`;
         resultDescription.innerHTML = description;
         adviceText.innerText = advice;
-        badgePlaceholder.style.backgroundColor = badgeColor;
 
         // アイコンとスコア表示
         principlesContainer.innerHTML = '';
