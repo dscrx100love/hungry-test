@@ -146,20 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let resultType, description, badgeColor;
-        if (totalScore >= 120) {
-            resultType = "盤石最強タイプ";
-            description = `<strong>素晴らしい！あなたは既に「食いっぱぐれない」ための強固な土台を築いています。</strong><br><br>10の原則のほとんどを高いレベルで実践できており、自己管理能力が非常に高いです。自信を持って、そのスタイルを続けていきましょう。<br><br>次のステージは「より深く」探求し、影響力を「より広く」展開していくことです。`;
-            badgeColor = 'var(--gold)';
-        } else if (totalScore >= 75) {
-            resultType = "伸びしろタイプ";
-            description = `<strong>可能性の塊！あなたは「食いっぱぐれない」自分に変わる大きなポテンシャルを秘めています。</strong><br><br>いくつかの原則は実践できています。しかし、まだ改善の余地があるようです。`;
-            badgeColor = 'var(--silver)';
-        } else {
-            resultType = "リスクタイプ";
-            description = `<strong>今が絶好のチャンス！ここから人生を好転させていきましょう。</strong><br><br>診断お疲れ様でした。正直すこし不安を感じているかもしれません。しかし、いま最も大事なのは、あなたが「自分の現在地を正直に把握できた」という事実です。`;
-            badgeColor = 'var(--bronze)';
-        }
-        
+
         const minScore = Math.min(...principleAverages);
         let weakestPrinciples = principles.filter((p, i) => principleAverages[i] === minScore);
 
@@ -176,12 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
             advice = `【${weakestPrinciples[0]}】`;
         }
 
-        if (totalScore >= 75) {
-            description += `特に <strong>${advice}</strong> の項目は、あなたの「伸びしろ」です。ここを意識的に改善するだけで、人生の安定度と幸福度はUPしていくでしょう。<br><br>ただし、完璧を目指す必要はありません。まずは、最も点数が低かった項目から「一つ行動を変えてみる」ことから始めてみませんか？`;
+        if (totalScore >= 120) {
+            resultType = "盤石最強タイプ";
+            badgeColor = 'var(--gold)';
+            description = `<strong>素晴らしい！あなたは既に「食いっぱぐれない」ための強固な土台を築いています。</strong><br><br>10の原則のほとんどを高いレベルで実践できており、自己管理能力が非常に高いです。自信を持って、そのスタイルを続けていきましょう。<br><br>次のステージは「より深く」探求し、影響力を「より広く」展開していくことです。<br><br>今後のメルマガでは、あなたのレベルをさらに引き上げるための応用的な思考法や、新しい時代の稼ぎ方、生き方についてもお届けします。いっしょに学び続けてレベルアップしていきましょう。`;
+        } else if (totalScore >= 75) {
+            resultType = "伸びしろタイプ";
+            badgeColor = 'var(--silver)';
+            description = `<strong>可能性の塊！あなたは「食いっぱぐれない」自分に変わる大きなポテンシャルを秘めています。</strong><br><br>いくつかの原則は実践できています。しかし、まだ改善の余地があるようです。特に <strong>${advice}</strong> の項目は、あなたの「伸びしろ」です。ここを意識的に改善するだけで、人生の安定度と幸福度はUPしていくでしょう。<br><br>ただし、完璧を目指す必要はありません。まずは、最も点数が低かった項目から「一つ行動を変えてみる」ことから始めてみませんか？<br><br>今後のメルマガでは、あなたの「伸びしろ」である各原則の改善につながる考え方を一つずつ解説していきます。診断で明らかになった課題を、メルマガを読みながら一緒にクリアしていきましょう！`;
         } else {
-             description += `何事も変化は小さなところから。特に <strong>${advice}</strong> は、人生を好転させるための最優先課題です。<br><br>絶望しないでくださいね。今後のメルマガでは、まず何から手をつけるべきか、人生の土台となる基本的な原則から、必要な考え方をお伝えしていきます。一つずつ一緒に乗り越え、盤石な自分を築き上げていきましょう。`;
+            resultType = "リスクタイプ";
+            badgeColor = 'var(--bronze)';
+            description = `<strong>今が絶好のチャンス！ここから人生を好転させていきましょう。</strong><br><br>診断お疲れ様でした。正直すこし不安を感じているかもしれません。しかし、いま最も大事なのは、あなたが「自分の現在地を正直に把握できた」という事実です。何事も変化は小さなところから。特に <strong>${advice}</strong> は、人生を好転させるための最優先課題です。<br><br>絶望しないでくださいね。今後のメルマガでは、まず何から手をつけるべきか、人生の土台となる基本的な原則から、必要な考え方をお伝えしていきます。一つずつ一緒に乗り越え、盤石な自分を築き上げていきましょう。`;
         }
-
 
         displayResults(totalScore, resultType, description, principleAverages, advice, badgeColor);
     }
@@ -189,6 +183,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayResults(totalScore, resultType, description, principleAverages, advice, badgeColor) {
         quizPage.classList.add('hidden');
         resultPage.classList.remove('hidden');
+
+        // 結果に応じてキャラクターの画像を変更
+        let charImgSrc;
+        if (resultType === "盤石最強タイプ") {
+            charImgSrc = 'images/char-happy.png';
+        } else if (resultType === "伸びしろタイプ") {
+            charImgSrc = 'images/char-worried.png';
+        } else { // リスクタイプ
+            charImgSrc = 'images/char-crying.png';
+        }
+        resultCharImg.src = charImgSrc;
 
         resultTitle.innerText = resultType;
         resultScore.innerText = `${totalScore}点 / 150点満点`;
